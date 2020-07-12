@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Column from "./Column";
 
 const StyledKanban = styled.div`
-  border: solid 1px red;
+  background: #eeeeee;
   display: flex;
   flex-flow: center;
+  height: 600px;
 `;
 
 const columns = [
