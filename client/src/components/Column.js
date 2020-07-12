@@ -5,6 +5,7 @@ import styled from "styled-components";
 const StyledColumn = styled.div`
   order: ${(props) => props.position};
   margin: 13px;
+  padding: 13px;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
   background: #fafafa;
@@ -15,9 +16,25 @@ const StyledColumn = styled.div`
 `;
 
 const Column = (props) => {
+  function onDragOver(ev, col) {
+    ev.preventDefault();
+    //    console.log(`au dessus colonne ${col.title}`)
+  }
+
+  function onDrop(ev, col) {
+    console.log(`drop dans la colonne ${col.title}`);
+    var data = ev.dataTransfer.getData("id");
+    console.log(data);
+    ev.target.appendChild(document.getElementById(data));
+  }
+
   return (
-    <StyledColumn position={props.position}>
-      {props.title}
+    <StyledColumn
+      position={props.position}
+      onDragOver={(event) => onDragOver(event, props.column)}
+      onDrop={(event) => onDrop(event, props.column)}
+    >
+      {props.column.title}
       {props.cards.map((card) => (
         <Card key={card.position} card={card}></Card>
       ))}

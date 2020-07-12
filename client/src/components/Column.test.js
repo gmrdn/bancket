@@ -3,6 +3,10 @@ import { render, screen } from "@testing-library/react";
 import Column from "./Column";
 
 test("renders a column with cards in it", () => {
+  const column = {
+    title: "Jest Col",
+    position: 1,
+  };
   const cards = [
     {
       column: 1,
@@ -20,7 +24,7 @@ test("renders a column with cards in it", () => {
       position: 3,
     },
   ];
-  render(<Column cards={cards} />);
+  render(<Column column={column} cards={cards} />);
   expect(screen.getByText("Card 1"));
   expect(screen.getByText("Card 3"));
 });

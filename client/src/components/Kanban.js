@@ -20,6 +20,10 @@ const columns = [
   },
   {
     position: 3,
+    title: "Empty",
+  },
+  {
+    position: 4,
     title: "Right",
   },
 ];
@@ -46,7 +50,7 @@ const cards = [
     position: 1,
   },
   {
-    column: 3,
+    column: 4,
     title: "Card 5",
     position: 1,
   },
@@ -62,7 +66,7 @@ const Kanban = () => {
             <Column
               key={column.position}
               position={column.position}
-              title={column.title}
+              column={column}
               cards={cards.filter((card) => card.column == column.position)}
             ></Column>
           );
