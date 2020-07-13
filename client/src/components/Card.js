@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState, useContext, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
+import Cards from "../KanbanContext";
 
 const StyledCard = styled.div`
   border: solid 1px #e0e0e0;
@@ -32,20 +33,37 @@ const StyledPlaceholder = styled.div`
   margin-top: 13px;
   height: ${(props) => (props.open ? "100px" : "0px")};
   background: none;
+  border: ${(props) => (props.open ? "2px dashed #e0e0e0" : "0px")};
+  border-radius: 5px;
 `;
 
 export default function Card(props) {
+  const { cards, updateCards } = useContext(Cards);
   const [open, setOpen] = useState(false);
+  const [draggedCard, setDraggedCard] = useState({});
+
+  useEffect(() => {
+    console.log("USE EFFECT");
+    if (props.openPlaceHolder == false) {
+      setOpen(false);
+    }
+
+    // setOpen(false);
+  });
 
   function onDrag(ev, card) {
+    console.log(`onDrag : dragged card id: ${draggedCard.id}`);
     ev.dataTransfer.setData("id", ev.target.id);
+    setDraggedCard(card);
     ev.target.classList.add("dragged");
   }
 
-  function onDrop(ev) {
-    ev.target.classList.remove("dragged");
+  function onDrop(ev, card) {
+    console.log(`onDrop : dragged card id: ${draggedCard.id}`);
     setOpen(false);
-    console.log("position : " + ev.dataTransfer.getData("position"));
+    ev.target.classList.remove("dragged");
+    updateCards(draggedCard, card.column);
+    setDraggedCard({});
   }
 
   function onDragOver(ev, card) {
@@ -54,19 +72,30 @@ export default function Card(props) {
   }
 
   function onDragEnter(ev, card) {
-    open ? setOpen(false) : setOpen(true);
+    console.log(`card id: ${card.id}`);
+    // console.log(`datatransfer id: ${ev.dataTransfer.getData("id")}`);
+    console.log(`onDragEnter: dragged card id: ${draggedCard.id}`);
+    if (draggedCard.id == card.id) {
+      setOpen(false);
+    } else {
+      open ? setOpen(false) : setOpen(true);
+    }
   }
   function onDragLeave(ev, card) {
+    console.log(`onDragLeave: dragged card id: ${draggedCard.id}`);
     setOpen(false);
   }
 
   function onDragExit(ev, card) {
+    console.log(`onDragExit: dragged card id: ${draggedCard.id}`);
     setOpen(false);
   }
 
   function onDragEnd(ev, card) {
+    console.log(`onDragEnd: dragged card id: ${draggedCard.id}`);
     setOpen(false);
     ev.target.classList.remove("dragged");
+    updateCards(draggedCard, card.column);
   }
 
   return (
@@ -80,7 +109,7 @@ export default function Card(props) {
         id={props.card.id}
         draggable="true"
         onDragStart={(event) => onDrag(event, props.card)}
-        onDrop={(event) => onDrop(event)}
+        onDrop={(event) => onDrop(event, props.card)}
         onDragEnter={(event) => onDragEnter(event, props.card)}
         onDragEnd={(event) => onDragEnd(event, props.card)}
       >

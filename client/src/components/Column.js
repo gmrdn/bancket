@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Card from "./Card";
 import styled from "styled-components";
 import Cards from "../KanbanContext";
@@ -24,26 +24,39 @@ const StyledColumn = styled.div`
 
 const Column = (props) => {
   const { cards, updateCards } = useContext(Cards);
+  const [openPlaceHolder, setOpenPlaceHolder] = useState(true);
 
   function onDragOver(ev, card) {
     ev.preventDefault();
+    // console.log("col onDragOver");
     // ev.target.classList.add("over");
   }
 
   function onDragEnter(ev, card) {
     ev.preventDefault();
-    ev.target.classList.add("over");
+    console.log("col onDragEnter");
+    setOpenPlaceHolder(true);
+
+    // ev.target.classList.add("over");
+  }
+  function onDragExit(ev, card) {
+    console.log(`col onDragExit`);
   }
 
   function onDragLeave(ev, card) {
-    ev.target.classList.remove("over");
+    ev.preventDefault();
+    console.log("col onDragLeave");
+    // ev.target.classList.remove("over");
   }
 
   function onDrop(ev, col) {
-    ev.target.classList.remove("over");
-
+    // ev.target.classList.remove("over");
+    ev.preventDefault();
+    console.log("col onDop");
     var data = ev.dataTransfer.getData("id");
     updateCards(data, col);
+    setOpenPlaceHolder(false);
+    // ev.dataTransfer.clearData();
   }
 
   return (
@@ -55,8 +68,15 @@ const Column = (props) => {
       onDrop={(event) => onDrop(event, props.column)}
     >
       {props.column.title}
+
       {props.cards.map((card) => (
-        <Card key={card.id} card={card}></Card>
+        <>
+          <Card
+            key={card.id}
+            card={card}
+            openPlaceHolder={openPlaceHolder}
+          ></Card>
+        </>
       ))}
     </StyledColumn>
   );
