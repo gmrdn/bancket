@@ -13,6 +13,9 @@ const StyledCard = styled.div`
   }
   height: ${(props) => (props.open ? "200px" : "100px")};
   transition: height 0.1s ease-out;
+  background: #fff;
+  outline: 3px dashed #e0e0e0;
+  outline-offset: -5px;
 `;
 
 const StyledButton = styled.button`

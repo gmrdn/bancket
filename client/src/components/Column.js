@@ -15,11 +15,11 @@ const StyledColumn = styled.div`
   flex-direction: column;
   font: 1.2em "Fira Sans", sans-serif;
   box-shadow: 2px 2px 4px 0px #e0e0e0;
-  // &.over {
-  //   background: #fff;
-  //   outline: 3px dashed #e0e0e0;
-  //   outline-offset: -5px;
-  // }
+  &.over {
+    background: #fff;
+    outline: 3px dashed #e0e0e0;
+    outline-offset: -5px;
+  }
 `;
 
 const Column = (props) => {
@@ -29,7 +29,7 @@ const Column = (props) => {
   function onDragOver(ev, card) {
     ev.preventDefault();
     // console.log("col onDragOver");
-    // ev.target.classList.add("over");
+    ev.target.classList.add("over");
   }
 
   function onDragEnter(ev, card) {
@@ -40,17 +40,19 @@ const Column = (props) => {
     // ev.target.classList.add("over");
   }
   function onDragExit(ev, card) {
+    ev.target.classList.remove("over");
+
     console.log(`col onDragExit`);
   }
 
   function onDragLeave(ev, card) {
     ev.preventDefault();
     console.log("col onDragLeave");
-    // ev.target.classList.remove("over");
+    ev.target.classList.remove("over");
   }
 
   function onDrop(ev, col) {
-    // ev.target.classList.remove("over");
+    ev.target.classList.remove("over");
     ev.preventDefault();
     console.log("col onDop");
     var data = ev.dataTransfer.getData("id");
