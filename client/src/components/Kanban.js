@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Column from "./Column";
+import Cards from "../KanbanContext";
 
 const StyledKanban = styled.div`
   background: #eeeeee;
@@ -28,35 +29,9 @@ const columns = [
   },
 ];
 
-const cards = [
-  {
-    column: 1,
-    title: "Card 1",
-    position: 1,
-  },
-  {
-    column: 1,
-    title: "Card 2",
-    position: 2,
-  },
-  {
-    column: 1,
-    title: "Card 3",
-    position: 3,
-  },
-  {
-    column: 2,
-    title: "Card 4",
-    position: 1,
-  },
-  {
-    column: 4,
-    title: "Card 5",
-    position: 1,
-  },
-];
-
 const Kanban = () => {
+  const cardsFromContext = useContext(Cards);
+
   return (
     <>
       <h2>Kanban</h2>
@@ -67,7 +42,9 @@ const Kanban = () => {
               key={column.position}
               position={column.position}
               column={column}
-              cards={cards.filter((card) => card.column == column.position)}
+              cards={cardsFromContext.filter(
+                (card) => card.column == column.position
+              )}
             ></Column>
           );
         })}
