@@ -32,7 +32,7 @@ export default function Card(props) {
   }
   return (
     <StyledCard
-      id={props.card.column + "-" + props.card.position}
+      id={props.card.id}
       draggable="true"
       onDragStart={(event) => drag(event, props.card)}
       onDragOver={(event) => dragOver(event, props.card)}

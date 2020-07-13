@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Card from "./Card";
 import styled from "styled-components";
+import Cards from "../KanbanContext";
 
 const StyledColumn = styled.div`
   order: ${(props) => props.position};
@@ -16,6 +17,8 @@ const StyledColumn = styled.div`
 `;
 
 const Column = (props) => {
+  const { cards, updateCards } = useContext(Cards);
+
   function onDragOver(ev, col) {
     ev.preventDefault();
     //    console.log(`au dessus colonne ${col.title}`)
@@ -25,7 +28,8 @@ const Column = (props) => {
     console.log(`drop dans la colonne ${col.title}`);
     var data = ev.dataTransfer.getData("id");
     console.log(data);
-    ev.target.appendChild(document.getElementById(data));
+    // ev.target.appendChild(document.getElementById(data));
+    updateCards(data, col);
   }
 
   return (

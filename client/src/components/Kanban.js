@@ -30,7 +30,7 @@ const columns = [
 ];
 
 const Kanban = () => {
-  const cardsFromContext = useContext(Cards);
+  const { cards, updateCards } = useContext(Cards);
 
   return (
     <>
@@ -42,9 +42,7 @@ const Kanban = () => {
               key={column.position}
               position={column.position}
               column={column}
-              cards={cardsFromContext.filter(
-                (card) => card.column == column.position
-              )}
+              cards={cards.filter((card) => card.column == column.position)}
             ></Column>
           );
         })}
