@@ -71,7 +71,9 @@ export default function Card(props) {
     console.log(`onDrop : dragged card id: ${draggedCard.id}`);
     setOpen(false);
     ev.target.classList.remove("dragged");
-    updateCards(draggedCard, card.column);
+
+    console.log(`onDrop : col number: ${card.column}`);
+    updateCards(ev.dataTransfer.getData("id"), card.column, card.position);
     setDraggedCard({});
   }
 
@@ -109,7 +111,7 @@ export default function Card(props) {
     console.log(`onDragEnd: dragged card id: ${draggedCard.id}`);
     setOpen(false);
     ev.target.classList.remove("dragged");
-    updateCards(draggedCard, card.column);
+    // updateCards(draggedCard, card.column, card.position);
   }
 
   return (

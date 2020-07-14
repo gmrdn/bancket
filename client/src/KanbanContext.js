@@ -20,6 +20,42 @@ export const cards = [
     position: 3,
   },
   {
+    id: 58813679,
+    column: 1,
+    title: "Bob",
+    position: 4,
+  },
+  {
+    id: 81637911,
+    column: 1,
+    title: "John",
+    position: 5,
+  },
+  {
+    id: 20981715,
+    column: 1,
+    title: "Paul",
+    position: 6,
+  },
+  {
+    id: 57698320,
+    column: 1,
+    title: "Yoko",
+    position: 7,
+  },
+  {
+    id: 56476789,
+    column: 1,
+    title: "Geoges",
+    position: 8,
+  },
+  {
+    id: 89098765,
+    column: 1,
+    title: "Ringo",
+    position: 9,
+  },
+  {
     id: 53928750,
     column: 2,
     title: "Card 4",
