@@ -29,6 +29,7 @@ const StyledButton = styled.button`
   height: 100px;
   width: 100%;
   font-size: 1em;
+  color: #424242;
   cursor: pointer;
   position: absolute;
   bottom: 0;

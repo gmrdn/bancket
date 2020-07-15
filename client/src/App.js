@@ -1,10 +1,18 @@
 import React from "react";
 import Kanban from "./components/Kanban";
 import Cards, { cards } from "./KanbanContext";
+import io from "socket.io-client";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    const socket = io("http://localhost:5000");
+
+    socket.on("update", (data) => {
+      console.log(`update received with data`);
+      console.log(data);
+      this.setState({ cards: data });
+    });
 
     this.updateCards = (card_id, new_col, new_position) => {
       const card_moving = this.state.cards.find((card) => card_id == card.id);
@@ -83,6 +91,8 @@ class App extends React.Component {
       this.setState({
         cards: newCards,
       });
+
+      socket.emit("update", newCards);
     };
     this.state = {
       cards: cards,
