@@ -75,6 +75,7 @@ export default function Card(props) {
     console.log(`onDrop : col number: ${card.column}`);
     updateCards(ev.dataTransfer.getData("id"), card.column, card.position);
     setDraggedCard({});
+    ev.stopPropagation();
   }
 
   function onDragOver(ev, card) {

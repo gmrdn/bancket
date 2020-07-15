@@ -190,4 +190,189 @@ describe("update cards", () => {
     wrapper.instance().updateCards(12, 1, 5);
     expect(wrapper.state("cards")).toEqual(expected);
   });
+
+  test("Different column, middle of full to empty", () => {
+    const expected = [
+      {
+        id: 11,
+        column: 1,
+        title: "Card 1",
+        position: 1,
+      },
+      {
+        id: 12,
+        column: 3,
+        title: "Card 2",
+        position: 1,
+      },
+      {
+        id: 13,
+        column: 1,
+        title: "Card 3",
+        position: 2,
+      },
+      {
+        id: 14,
+        column: 1,
+        title: "Card 4",
+        position: 3,
+      },
+      {
+        id: 21,
+        column: 2,
+        title: "Card 5",
+        position: 1,
+      },
+    ];
+    wrapper.instance().updateCards(12, 3, 1);
+    expect(wrapper.state("cards")).toEqual(expected);
+  });
+
+  test("Different column, move to empty", () => {
+    const expected = [
+      {
+        id: 11,
+        column: 1,
+        title: "Card 1",
+        position: 1,
+      },
+      {
+        id: 12,
+        column: 1,
+        title: "Card 2",
+        position: 2,
+      },
+      {
+        id: 13,
+        column: 1,
+        title: "Card 3",
+        position: 3,
+      },
+      {
+        id: 14,
+        column: 1,
+        title: "Card 4",
+        position: 4,
+      },
+      {
+        id: 21,
+        column: 3,
+        title: "Card 5",
+        position: 1,
+      },
+    ];
+    wrapper.instance().updateCards(21, 3, 1);
+    expect(wrapper.state("cards")).toEqual(expected);
+  });
+
+  test("Different column, move to top", () => {
+    const expected = [
+      {
+        id: 11,
+        column: 1,
+        title: "Card 1",
+        position: 2,
+      },
+      {
+        id: 12,
+        column: 1,
+        title: "Card 2",
+        position: 3,
+      },
+      {
+        id: 13,
+        column: 1,
+        title: "Card 3",
+        position: 4,
+      },
+      {
+        id: 14,
+        column: 1,
+        title: "Card 4",
+        position: 5,
+      },
+      {
+        id: 21,
+        column: 1,
+        title: "Card 5",
+        position: 1,
+      },
+    ];
+    wrapper.instance().updateCards(21, 1, 1);
+    expect(wrapper.state("cards")).toEqual(expected);
+  });
+
+  test("Different column, move to middle", () => {
+    const expected = [
+      {
+        id: 11,
+        column: 1,
+        title: "Card 1",
+        position: 1,
+      },
+      {
+        id: 12,
+        column: 1,
+        title: "Card 2",
+        position: 2,
+      },
+      {
+        id: 13,
+        column: 1,
+        title: "Card 3",
+        position: 4,
+      },
+      {
+        id: 14,
+        column: 1,
+        title: "Card 4",
+        position: 5,
+      },
+      {
+        id: 21,
+        column: 1,
+        title: "Card 5",
+        position: 3,
+      },
+    ];
+    wrapper.instance().updateCards(21, 1, 3);
+    expect(wrapper.state("cards")).toEqual(expected);
+  });
+
+  test("Different column, move to bottom", () => {
+    const expected = [
+      {
+        id: 11,
+        column: 1,
+        title: "Card 1",
+        position: 1,
+      },
+      {
+        id: 12,
+        column: 1,
+        title: "Card 2",
+        position: 2,
+      },
+      {
+        id: 13,
+        column: 1,
+        title: "Card 3",
+        position: 3,
+      },
+      {
+        id: 14,
+        column: 1,
+        title: "Card 4",
+        position: 4,
+      },
+      {
+        id: 21,
+        column: 1,
+        title: "Card 5",
+        position: 5,
+      },
+    ];
+    wrapper.instance().updateCards(21, 1, "$");
+    expect(wrapper.state("cards")).toEqual(expected);
+  });
 });

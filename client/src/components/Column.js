@@ -57,7 +57,8 @@ const Column = (props) => {
     ev.preventDefault();
     console.log("col onDop");
     var data = ev.dataTransfer.getData("id");
-    // updateCards(data, col.position, 1);
+    updateCards(data, col.position, "$");
+
     setOpenPlaceHolder(false);
     // ev.dataTransfer.clearData();
   }
